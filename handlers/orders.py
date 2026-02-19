@@ -85,9 +85,16 @@ async def back_to_main_menu(message: Message, state: FSMContext):
     data = await state.get_data()
     language = data.get('language', 'uz')
     
+    user_id = message.from_user.id
+    sep = '&' if '?' in WEB_APP_SHOP_URL else '?'
+    
+    shop_url = f"{WEB_APP_SHOP_URL}{sep}tid={user_id}"
+    chat_url = f"{WEB_APP_CHAT_URL}{'&' if '?' in WEB_APP_CHAT_URL else '?'}tid={user_id}"
+    orders_url = f"{WEB_APP_ORDERS_URL}{'&' if '?' in WEB_APP_ORDERS_URL else '?'}tid={user_id}"
+
     if language == 'uz':
-        keyboard = get_main_menu_uz(WEB_APP_SHOP_URL, WEB_APP_CHAT_URL, WEB_APP_ORDERS_URL)
+        keyboard = get_main_menu_uz(shop_url, chat_url, orders_url)
     else:
-        keyboard = get_main_menu_ru(WEB_APP_SHOP_URL, WEB_APP_CHAT_URL, WEB_APP_ORDERS_URL)
+        keyboard = get_main_menu_ru(shop_url, chat_url, orders_url)
     
     await message.answer(get_text(language, 'back_to_menu'), reply_markup=keyboard)
