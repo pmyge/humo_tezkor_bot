@@ -8,7 +8,7 @@ def get_main_menu_uz(shop_url: str, chat_url: str, orders_url: str):
     keyboard = [
         [
             KeyboardButton(text="🛒 Do'kon", web_app=WebAppInfo(url=shop_url)),
-            KeyboardButton(text="📦 Buyurtmalar", web_app=WebAppInfo(url=orders_url))
+            KeyboardButton(text="📦 Buyurtmalarim", web_app=WebAppInfo(url=orders_url))
         ],
         [
             KeyboardButton(text="💬 Yordam", web_app=WebAppInfo(url=chat_url)),
@@ -52,10 +52,10 @@ def get_main_menu_ru(shop_url: str, chat_url: str, orders_url: str):
     keyboard = [
         [
             KeyboardButton(text="🛒 Магазин", web_app=WebAppInfo(url=shop_url)),
-            KeyboardButton(text="📦 Заказы", web_app=WebAppInfo(url=orders_url))
+            KeyboardButton(text="📦 Мои заказы", web_app=WebAppInfo(url=orders_url))
         ],
         [
-            KeyboardButton(text="💬 Поддержка", web_app=WebAppInfo(url=chat_url)),
+            KeyboardButton(text="💬 Помощь", web_app=WebAppInfo(url=chat_url)),
             KeyboardButton(text="🌐 Язык: Русский")
         ],
     ]
