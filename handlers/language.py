@@ -34,7 +34,7 @@ async def change_language(message: Message, state: FSMContext):
     await message.answer(text, reply_markup=keyboard)
 
 
-@router.message(F.text.in_(["🇺🇿 O'zbek tili", "🇺🇿 Узбекский язык"]))
+@router.message(F.text.in_(["🇺🇿 O'zbekcha"]))
 async def select_uzbek(message: Message, state: FSMContext):
     """Select Uzbek language"""
     user_id = message.from_user.id
@@ -46,14 +46,20 @@ async def select_uzbek(message: Message, state: FSMContext):
         await state.update_data(language='uz')
         
         text = get_text('uz', 'language_changed')
-        keyboard = get_main_menu_uz(WEB_APP_SHOP_URL, WEB_APP_CHAT_URL, WEB_APP_ORDERS_URL)
+        
+        # Refresh URLs with tid
+        shop_url = f"{WEB_APP_SHOP_URL}{'&' if '?' in WEB_APP_SHOP_URL else '?'}tid={user_id}"
+        chat_url = f"{WEB_APP_CHAT_URL}{'&' if '?' in WEB_APP_CHAT_URL else '?'}tid={user_id}"
+        orders_url = f"{WEB_APP_ORDERS_URL}{'&' if '?' in WEB_APP_ORDERS_URL else '?'}tid={user_id}"
+        
+        keyboard = get_main_menu_uz(shop_url, chat_url, orders_url)
         
         await message.answer(text, reply_markup=keyboard)
     else:
         await message.answer("❌ Xatolik yuz berdi.")
 
 
-@router.message(F.text.in_(["🇷🇺 Rus tili", "🇷🇺 Русский язык"]))
+@router.message(F.text.in_(["🇷🇺 Русский"]))
 async def select_russian(message: Message, state: FSMContext):
     """Select Russian language"""
     user_id = message.from_user.id
@@ -65,7 +71,13 @@ async def select_russian(message: Message, state: FSMContext):
         await state.update_data(language='ru')
         
         text = get_text('ru', 'language_changed')
-        keyboard = get_main_menu_ru(WEB_APP_SHOP_URL, WEB_APP_CHAT_URL, WEB_APP_ORDERS_URL)
+        
+        # Refresh URLs with tid
+        shop_url = f"{WEB_APP_SHOP_URL}{'&' if '?' in WEB_APP_SHOP_URL else '?'}tid={user_id}"
+        chat_url = f"{WEB_APP_CHAT_URL}{'&' if '?' in WEB_APP_CHAT_URL else '?'}tid={user_id}"
+        orders_url = f"{WEB_APP_ORDERS_URL}{'&' if '?' in WEB_APP_ORDERS_URL else '?'}tid={user_id}"
+        
+        keyboard = get_main_menu_ru(shop_url, chat_url, orders_url)
         
         await message.answer(text, reply_markup=keyboard)
     else:

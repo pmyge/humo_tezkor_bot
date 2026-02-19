@@ -21,8 +21,8 @@ def get_main_menu_uz(shop_url: str, chat_url: str, orders_url: str):
 def get_language_selection_uz():
     """Language selection keyboard"""
     keyboard = [
-        [KeyboardButton(text="🇺🇿 O'zbek tili")],
-        [KeyboardButton(text="🇷🇺 Rus tili")],
+        [KeyboardButton(text="🇺🇿 O'zbekcha")],
+        [KeyboardButton(text="🇷🇺 Русский")],
     ]
     return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
 
@@ -65,8 +65,8 @@ def get_main_menu_ru(shop_url: str, chat_url: str, orders_url: str):
 def get_language_selection_ru():
     """Language selection keyboard"""
     keyboard = [
-        [KeyboardButton(text="🇺🇿 Узбекский язык")],
-        [KeyboardButton(text="🇷🇺 Русский язык")],
+        [KeyboardButton(text="🇺🇿 O'zbekcha")],
+        [KeyboardButton(text="🇷🇺 Русский")],
     ]
     return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
 

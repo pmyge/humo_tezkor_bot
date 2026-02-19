@@ -18,9 +18,15 @@ api = APIService(BACKEND_API_URL)
 async def cmd_start(message: Message, state: FSMContext):
     """Handle /start command"""
     user = message.from_user
-    language = 'uz' # Default language
     
-    # Save user data in state (minimal)
+    # Try to fetch user language from backend
+    try:
+        user_info = await api.get_user_info(user.id)
+        language = user_info.get('language', 'uz') if user_info else 'uz'
+    except Exception:
+        language = 'uz'
+
+    # Save user data in state
     await state.update_data(language=language)
     
     # Send welcome message
@@ -33,9 +39,9 @@ async def cmd_start(message: Message, state: FSMContext):
     chat_url = f"{WEB_APP_CHAT_URL}{sep}tid={user.id}"
     orders_url = f"{WEB_APP_ORDERS_URL}{sep}tid={user.id}"
 
-    if language == 'uz':
-        keyboard = get_main_menu_uz(shop_url, chat_url, orders_url)
-    else:
+    if language == 'ru':
         keyboard = get_main_menu_ru(shop_url, chat_url, orders_url)
+    else:
+        keyboard = get_main_menu_uz(shop_url, chat_url, orders_url)
     
     await message.answer(f"{welcome_text}\n\n{choose_action}", reply_markup=keyboard)
