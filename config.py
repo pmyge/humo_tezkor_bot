@@ -18,9 +18,9 @@ def get_sanitized_env(key, default):
     return val
 
 # Backend API URL
-BACKEND_API_URL = get_sanitized_env('BACKEND_API_URL', 'https://humo-tezkor-backend.onrender.com/api')
+BACKEND_API_URL = get_sanitized_env('BACKEND_API_URL', 'https://humo-tezkor-backend.onrender.com/api').rstrip('/')
 
 # Web App URLs
-WEB_APP_SHOP_URL = get_sanitized_env('WEB_APP_SHOP_URL', 'https://humo-tezkor-frontend.vercel.app/')
-WEB_APP_CHAT_URL = get_sanitized_env('WEB_APP_CHAT_URL', 'https://humo-tezkor-frontend.vercel.app/chat')
-WEB_APP_ORDERS_URL = get_sanitized_env('WEB_APP_ORDERS_URL', 'https://humo-tezkor-frontend.vercel.app/orders')
+WEB_APP_SHOP_URL = get_sanitized_env('WEB_APP_SHOP_URL', 'https://humo-tezkor-frontend.vercel.app').rstrip('/')
+WEB_APP_CHAT_URL = get_sanitized_env('WEB_APP_CHAT_URL', 'https://humo-tezkor-frontend.vercel.app/chat').rstrip('/')
+WEB_APP_ORDERS_URL = get_sanitized_env('WEB_APP_ORDERS_URL', 'https://humo-tezkor-frontend.vercel.app/orders').rstrip('/')
