@@ -8,18 +8,19 @@ load_dotenv(BASE_DIR / '.env')  # Root .env
 load_dotenv(Path(__file__).parent / '.env')  # Local bot/.env
 
 # Bot token
-BOT_TOKEN = os.getenv('BOT_TOKEN', '')
+BOT_TOKEN = os.getenv('BOT_TOKEN', '').strip()
+
+# Helper to get and sanitize URLs
+def get_sanitized_env(key, default):
+    val = os.getenv(key, default).strip()
+    if not val or 'your-new' in val or 'example.com' in val:
+        return default.strip()
+    return val
 
 # Backend API URL
-BACKEND_API_URL = os.getenv('BACKEND_API_URL', 'https://your-new-backend.onrender.com/api')
+BACKEND_API_URL = get_sanitized_env('BACKEND_API_URL', 'https://humo-tezkor-backend.onrender.com/api')
 
 # Web App URLs
-def get_valid_url(env_key, default_url):
-    url = os.getenv(env_key, '')
-    if not url or 'your-webapp.com' in url or 'example.com' in url or 'gold-delta' in url:
-        return default_url
-    return url
-
-WEB_APP_SHOP_URL = get_valid_url('WEB_APP_SHOP_URL', 'https://your-new-frontend.vercel.app')
-WEB_APP_CHAT_URL = get_valid_url('WEB_APP_CHAT_URL', 'https://your-new-frontend.vercel.app/chat')
-WEB_APP_ORDERS_URL = get_valid_url('WEB_APP_ORDERS_URL', 'https://your-new-frontend.vercel.app/orders')
+WEB_APP_SHOP_URL = get_sanitized_env('WEB_APP_SHOP_URL', 'https://humo-tezkor-frontend.vercel.app/')
+WEB_APP_CHAT_URL = get_sanitized_env('WEB_APP_CHAT_URL', 'https://humo-tezkor-frontend.vercel.app/chat')
+WEB_APP_ORDERS_URL = get_sanitized_env('WEB_APP_ORDERS_URL', 'https://humo-tezkor-frontend.vercel.app/orders')
